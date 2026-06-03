@@ -1,0 +1,24 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "declaration": true,
+    "removeComments": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "allowSyntheticDefaultImports": true,
+    "target": "ES2022",
+    "sourceMap": true,
+    "outDir": "./dist",
+    "baseUrl": "./",
+    "incremental": true,
+    "strict": true,
+    "skipLibCheck": true,
+    "paths": {
+      "@gbs/common": ["libs/common/src"],
+      "@gbs/database": ["libs/database/src"],
+      "@gbs/auth": ["libs/auth/src"],
+      "@gbs/storage": ["libs/storage/src"],
+      "@gbs/queue": ["libs/queue/src"]
+    }
+  }
+}
