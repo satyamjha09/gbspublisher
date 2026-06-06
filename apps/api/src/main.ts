@@ -1,6 +1,6 @@
 import "reflect-metadata";
-import compression from "compression";
-import cookieParser from "cookie-parser";
+import * as compression from "compression";
+import * as cookieParser from "cookie-parser";
 import helmet from "helmet";
 import { clerkMiddleware } from "@clerk/express";
 import { NestFactory } from "@nestjs/core";

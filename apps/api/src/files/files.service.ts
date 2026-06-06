@@ -3,12 +3,17 @@ import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 import { Inject, Injectable, NotFoundException } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 import { FileProcessingStatus } from "@prisma/client";
-import type { S3Client } from "@aws-sdk/client-s3";
 import { PrismaService } from "@gbs/database";
 import { QueueService } from "@gbs/queue";
 import { createSlug } from "@gbs/common";
-import { S3_CLIENT } from "./files.module";
+import { S3_CLIENT } from "./files.constants";
 import { CompleteUploadDto, CreateUploadDto } from "./files.dto";
+
+type S3SignerClient = ConstructorParameters<typeof PutObjectCommand>[0] extends never
+  ? never
+  : Parameters<typeof getSignedUrl>[1] extends never
+    ? never
+    : Parameters<typeof getSignedUrl>[0];
 
 @Injectable()
 export class FilesService {
@@ -18,7 +23,7 @@ export class FilesService {
     private readonly prisma: PrismaService,
     private readonly config: ConfigService,
     private readonly queueService: QueueService,
-    @Inject(S3_CLIENT) private readonly s3Client: S3Client
+    @Inject(S3_CLIENT) private readonly s3Client: S3SignerClient
   ) {
     this.bucket = this.config.get<string>("S3_BUCKET", "publication-assets");
   }

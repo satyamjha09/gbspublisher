@@ -1,10 +1,12 @@
 import { Module } from "@nestjs/common";
 import { QueueModule } from "@gbs/queue";
+import { ApiAuthModule } from "../auth/auth.module";
+import { UsersModule } from "../users/users.module";
 import { ProjectsController } from "./projects.controller";
 import { ProjectsService } from "./projects.service";
 
 @Module({
-  imports: [QueueModule],
+  imports: [ApiAuthModule, QueueModule, UsersModule],
   controllers: [ProjectsController],
   providers: [ProjectsService],
   exports: [ProjectsService]

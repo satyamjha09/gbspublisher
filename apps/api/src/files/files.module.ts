@@ -2,13 +2,14 @@ import { S3Client } from "@aws-sdk/client-s3";
 import { Module } from "@nestjs/common";
 import { ConfigModule, ConfigService } from "@nestjs/config";
 import { QueueModule } from "@gbs/queue";
+import { ApiAuthModule } from "../auth/auth.module";
+import { UsersModule } from "../users/users.module";
+import { S3_CLIENT } from "./files.constants";
 import { FilesController } from "./files.controller";
 import { FilesService } from "./files.service";
 
-export const S3_CLIENT = "S3_CLIENT";
-
 @Module({
-  imports: [ConfigModule, QueueModule],
+  imports: [ApiAuthModule, ConfigModule, QueueModule, UsersModule],
   controllers: [FilesController],
   providers: [
     FilesService,
